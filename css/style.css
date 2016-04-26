@@ -1,0 +1,30 @@
+*{
+    list-style: none;
+}
+
+.list{
+    list-style: none;
+}
+
+h2{
+    display: block;
+    margin-left: 15%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+ul{
+    margin-left: 5%;
+    margin-top: 1%;
+    font-size: large;
+}
+
+li{
+    margin-left: 8%;
+    margin-top: 1%;
+}
+
+.btn{
+    margin-left: 12%;
+    margin-top: 2%;
+}
