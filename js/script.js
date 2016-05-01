@@ -11,7 +11,7 @@ var Tests = {
         localStorage.setItem('questions', this.questions);
         localStorage.setItem('answers', this.answer);
         var ans = [];
-        for(var i = 0; i < 3; i++) {
+        for (var i = 0; i < 3; i++) {
             ans = localStorage.getItem('answers').split(',');
         }
         this.createTreeText(localStorage.getItem('questions').split(','), ans);
@@ -30,8 +30,8 @@ var Tests = {
         ['Вариант ответа №11', 'Вариант ответа №21', 'Вариант ответа №31'],
         ['Вариант ответа №12', 'Вариант ответа №22', 'Вариант ответа №32'],
         ['Вариант ответа №13', 'Вариант ответа №23', 'Вариант ответа №33']
-    ] ,
-    
+    ],
+
     createForm: function () {
         var container = document.getElementsByClassName('container');
         container[0].innerHTML = '<form>' + '</form>';
@@ -45,11 +45,11 @@ var Tests = {
 
         form.innerHTML += '<h2>' + 'Тест по программированию' + '</h2>' + '\n';
 
-        for(var i = 0; i < question.length; i++) {
+        for (var i = 0; i < question.length; i++) {
             form.innerHTML += '<ul>' + question[i] + '</ul>';
             var ul = document.querySelectorAll('ul');
             for (var j = 0; j < 3; j++) {
-                ul[i].innerHTML += '<li>' + '<label>' + '<input type="radio" name="answer'+i+'" value="'+answer[j]+'">' + answer[j] + '</label>' + '</li>';
+                ul[i].innerHTML += '<li>' + '<label>' + '<input type="radio" name="answer' + i + '" value="' + answer[j] + '">' + answer[j] + '</label>' + '</li>';
             }
             answer.splice(0, 3);
         }
@@ -59,60 +59,73 @@ var Tests = {
         var button = document.querySelector('button');
         button.className = 'btn btn-info';
         var li = document.querySelectorAll('li');
-        for(i = 0; i <li.length; i++) {
+        for (i = 0; i < li.length; i++) {
             li[i].className = 'list';
         }
     },
 
-    checkAnswer: function (answer) {
-        var positiveAnswer = 0;
-        var input = document.querySelectorAll('input');
-        var resultOfTest = document.getElementsByClassName('result_of_test');
-        // console.log(answer);
-        for(var i = 0; i < input.length; i++) {
-            for(var j = 0; j < answer.length; j++) {
-                console.log(input[i].checked);
-                if(input[i].checked) {
-                    if(input[i].value == answer[j]) {
-                        resultOfTest.innerHTML = 'Вопрос №' + parseInt(input.name) +' Ответ № ' + j + ' правильный!';
-                        positiveAnswer++;
-                    } else {
-                        resultOfTest.innerHTML = 'Ответ на вопрос№' + parseInt(input.name) + 'не верный(';
-                    }
-                }
-            }
-        }
-        resultOfTest.innerHTML = 'Кол-во правильных ответов: ' + positiveAnswer;
-    },
+    // checkAnswer: function (answer) {
+    //     var positiveAnswer = 0;
+    //     var input = document.querySelectorAll('input');
+    //     var resultOfTest = document.getElementsByClassName('result_of_test');
+    //     // console.log(answer);
+    //     for (var i = 0; i < input.length; i++) {
+    //         for (var j = 0; j < answer.length; j++) {
+    //             console.log(input[i].checked);
+    //             if (input[i].checked) {
+    //                 if (input[i].value == answer[j]) {
+    //                     resultOfTest.innerHTML = 'Вопрос №' + parseInt(input.name) + ' Ответ № ' + j + ' правильный!';
+    //                     positiveAnswer++;
+    //                 } else {
+    //                     resultOfTest.innerHTML = 'Ответ на вопрос№' + parseInt(input.name) + 'не верный(';
+    //                 }
+    //             }
+    //         }
+    //     }
+    //     resultOfTest.innerHTML = 'Кол-во правильных ответов: ' + positiveAnswer;
+    // },
 
     checkedAnswer: function (answer) {
-        var result = $('form').serializeArray();
+        var $result = $('form').serializeArray();
 
-        var resultOfTest = $('.result_of_test');
+        var $resultOfTest = $('.result_of_test');
+        //console.log(result);
 
-        for(var k = 0; k < answer.length; k++){
-            for(var i = 0; i < result.length; i++){
-                console.log('Answer '+result[i].value);
-                console.log('correctAnswer '+answer[k]);
-                if(result[i].value == answer[k]) {
-                    resultOfTest.innerHTML += 'Ответ ' + k + ' правильный!'
-                } else {
-                    resultOfTest.innerHTML += 'Ответ ' + k + ' неправильный('
-                }
+        //    for(var k = 0; k < answer.length; k++){
+        for (var i = 0; i < $result.length; i++) {
+                         //console.log('Answer ' + result[i].value);
+                         //console.log('correctAnswer ' + answer[i]);
+            if ($result[i].value == answer[i]) {
+                // console.log('эта хуйня работает');
+                $resultOfTest.append('<p>Ответ ' + $result[i].value + ' правильный!</p>');
+            } else {
+                $resultOfTest.append('<p>Ответ ' + $result[i].value + ' неправильный(</p>');
             }
+            //         }
+            //     }
         }
     }
 };
 
-(function(){Tests.init();})();
+Tests.init();
 
 (function () {
     var a = ['Вариант ответа №11', 'Вариант ответа №22', 'Вариант ответа №33'];
     // document.getElementsByClassName('btn-info')[0].addEventListener('click', Tests.checkAnswer(a));
 
-    var btn = document.getElementsByClassName('btn-info')[0];
+    var $btn = document.getElementsByClassName('btn-info')[0];
+    var $modalW = $('.modal_window');
+    var $modal = $('.modal');
 
-    btn.addEventListener('click', function () {
+    $btn.addEventListener('click', function () {
         Tests.checkedAnswer(a);
+        $modalW.fadeIn(100);
+        $modal.fadeIn(100);
     });
+
+    $('.close_modal_window').on('click', function () {
+        $modalW.fadeOut(100).children('.result_of_test').html('');
+        $modal.fadeOut(100);
+        $('input').removeAttr('checked');
+    })
 })();
