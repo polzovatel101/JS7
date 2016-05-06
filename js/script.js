@@ -17,13 +17,6 @@ var Tests = {
         this.createTreeText(localStorage.getItem('questions').split(','), ans);
     },
 
-    // checkOnClick: function () {
-    //     document.addEventListener("DOMContentLoaded", function () {
-    //         var a = ['Вариант ответа №11', 'Вариант ответа №22', 'Вариант ответа №33'];
-    //         document.querySelector('button').onclick = Tests.checkAnswer(a);
-    //     });
-    // },
-
     questions: ['Вопрос №1', 'Вопрос №2', 'Вопрос №3'],
 
     answer: [
@@ -64,45 +57,17 @@ var Tests = {
         }
     },
 
-    // checkAnswer: function (answer) {
-    //     var positiveAnswer = 0;
-    //     var input = document.querySelectorAll('input');
-    //     var resultOfTest = document.getElementsByClassName('result_of_test');
-    //     // console.log(answer);
-    //     for (var i = 0; i < input.length; i++) {
-    //         for (var j = 0; j < answer.length; j++) {
-    //             console.log(input[i].checked);
-    //             if (input[i].checked) {
-    //                 if (input[i].value == answer[j]) {
-    //                     resultOfTest.innerHTML = 'Вопрос №' + parseInt(input.name) + ' Ответ № ' + j + ' правильный!';
-    //                     positiveAnswer++;
-    //                 } else {
-    //                     resultOfTest.innerHTML = 'Ответ на вопрос№' + parseInt(input.name) + 'не верный(';
-    //                 }
-    //             }
-    //         }
-    //     }
-    //     resultOfTest.innerHTML = 'Кол-во правильных ответов: ' + positiveAnswer;
-    // },
-
     checkedAnswer: function (answer) {
         var $result = $('form').serializeArray();
-
         var $resultOfTest = $('.result_of_test');
-        //console.log(result);
 
-        //    for(var k = 0; k < answer.length; k++){
         for (var i = 0; i < $result.length; i++) {
-                         //console.log('Answer ' + result[i].value);
-                         //console.log('correctAnswer ' + answer[i]);
             if ($result[i].value == answer[i]) {
                 // console.log('эта хуйня работает');
                 $resultOfTest.append('<p>Ответ ' + $result[i].value + ' правильный!</p>');
             } else {
                 $resultOfTest.append('<p>Ответ ' + $result[i].value + ' неправильный(</p>');
             }
-            //         }
-            //     }
         }
     }
 };
@@ -111,7 +76,6 @@ Tests.init();
 
 (function () {
     var a = ['Вариант ответа №11', 'Вариант ответа №22', 'Вариант ответа №33'];
-    // document.getElementsByClassName('btn-info')[0].addEventListener('click', Tests.checkAnswer(a));
 
     var $btn = document.getElementsByClassName('btn-info')[0];
     var $modalW = $('.modal_window');
