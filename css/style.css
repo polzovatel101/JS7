@@ -2,6 +2,10 @@
     list-style: none;
 }
 
+body{
+    overflow: hidden;
+}
+
 .list{
     list-style: none;
 }
@@ -31,6 +35,7 @@ li{
 
 .modal{
     display: none;
+    overflow: auto;
     width: 100%;
     height: 100%;
     background-color: rgba(192, 192, 192, 0.75);
@@ -38,11 +43,9 @@ li{
 
 .modal_window{
     display: none;
-    position: absolute;
     top: 100px;
-    left: -13%;
-    width: 50%;
-    margin: 100px 40%;
+    width: 600px;
+    margin: 100px auto;
     padding: 100px;
     background-color: gainsboro;
     border: 1px solid grey;
